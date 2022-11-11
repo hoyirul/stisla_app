@@ -2,6 +2,8 @@
 
 import 'package:stisla_app/controllers/login_controller.dart';
 import 'package:stisla_app/controllers/registration_controller.dart';
+import 'package:stisla_app/partials/color_pickers.dart';
+import 'package:stisla_app/partials/font_pickers.dart';
 import 'package:stisla_app/views/auth/widgets/input_fields.dart';
 import 'package:stisla_app/views/auth/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         'WELCOME',
                         style: TextStyle(
                             fontSize: 30,
+                            fontFamily: FontPicker.medium,
                             color: Colors.black,
                             fontWeight: FontWeight.w400),
                       ),
@@ -48,24 +51,74 @@ class _AuthScreenState extends State<AuthScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MaterialButton(
-                          color: !isLogin.value ? Colors.white : Colors.amber,
-                          onPressed: () {
-                            isLogin.value = false;
-                          },
-                          child: Text('Register'),
-                        ),
-                        MaterialButton(
-                          color: isLogin.value ? Colors.white : Colors.amber,
-                          onPressed: () {
-                            isLogin.value = true;
-                          },
-                          child: Text('Login'),
-                        ),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.all(0),
+                      width: double.infinity,
+                      // color: ColorPicker.bg,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: isLogin.value ? Colors.white : ColorPicker.primary,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0xffeeeeee),
+                                    offset: Offset(0, 4),
+                                    blurRadius: 7
+                                  )
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  isLogin.value = false;
+                                },
+                                child: Center(
+                                  child: Text('Register', style: TextStyle(
+                                    fontFamily: FontPicker.semibold,
+                                    color: !isLogin.value ? Colors.white : ColorPicker.primary,
+                                  ),),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: !isLogin.value ? Colors.white : ColorPicker.primary,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0xffeeeeee),
+                                    offset: Offset(0, 4),
+                                    blurRadius: 7
+                                  )
+                                ],
+                              ),
+                              child: TextButton(
+                                // height: 50,
+                                // minWidth: 170,
+                                onPressed: () {
+                                  isLogin.value = true;
+                                },
+                                child: Center(
+                                  child: Text('Login', style: TextStyle(
+                                    color: isLogin.value ? ColorPicker.white : ColorPicker.primary,
+                                    fontFamily: FontPicker.semibold
+                                  ),),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 80,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stisla_app/partials/color_pickers.dart';
+import 'package:stisla_app/partials/font_pickers.dart';
 
 class SubmitButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -9,8 +11,8 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180,
-      height: 50,
+      width: double.infinity,
+      height: 60,
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [
         BoxShadow(
@@ -19,21 +21,22 @@ class SubmitButton extends StatelessWidget {
             blurRadius: 2,
             spreadRadius: 1)
       ]),
-      child: ElevatedButton(
+      child: TextButton(
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide.none)),
               backgroundColor: MaterialStateProperty.all<Color>(
-                Colors.pinkAccent,
+                ColorPicker.primary,
               )),
           onPressed: onPressed,
           child: Text(title,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
+                fontFamily: FontPicker.semibold
               ))),
     );
   }

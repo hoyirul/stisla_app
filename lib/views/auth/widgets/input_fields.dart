@@ -10,19 +10,33 @@ class InputTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 46,
-      child: TextField(
-        controller: textEditingController,
-        obscureText: _obscureText,
-        decoration: InputDecoration(
-            alignLabelWithHint: true,
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black)),
-            fillColor: Colors.white54,
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
-            contentPadding: EdgeInsets.only(bottom: 15),
-            focusColor: Colors.white60),
+      height: 60,
+      child: Container(
+        height: 60,
+        padding: const EdgeInsets.only(left: 25, right: 25, top: 12, bottom: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0xffeeeeee),
+              offset: Offset(0, 4),
+              blurRadius: 7
+            )
+          ],
+          color: Colors.white
+        ),
+        child: TextField(
+          controller: textEditingController,
+          obscureText: _obscureText,
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              alignLabelWithHint: true,
+              fillColor: Colors.white54,
+              hintText: hintText,
+              hintStyle: TextStyle(color: Colors.grey),
+              contentPadding: EdgeInsets.only(bottom: 15),
+              focusColor: Colors.white60),
+        ),
       ),
     );
   }
