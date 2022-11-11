@@ -51,7 +51,12 @@ class _AuthScreenState extends State<AuthScreen> {
                     SizedBox(
                       height: 20,
                     ),
+                    isLogin.value ? loginWidget() : registerWidget(),
+                    SizedBox(
+                      height: 80,
+                    ),
                     Container(
+                      alignment: Alignment.bottomCenter,
                       padding: const EdgeInsets.all(0),
                       width: double.infinity,
                       // color: ColorPicker.bg,
@@ -120,10 +125,6 @@ class _AuthScreenState extends State<AuthScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 80,
-                    ),
-                    isLogin.value ? loginWidget() : registerWidget()
                   ]),
             ),
           ),
