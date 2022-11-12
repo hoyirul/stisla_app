@@ -36,24 +36,36 @@ class _AuthScreenState extends State<AuthScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
-                    Container(
-                      child: Text(
-                        'WELCOME',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: FontPicker.medium,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400),
-                      ),
+                    Column(
+                      children: [
+                        Container(
+                          child: Text(
+                            'Stisla Apps',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontFamily: FontPicker.bold,
+                                color: ColorPicker.dark,
+                              ),
+                          ),
+                        ),
+                        Container(
+                          width: 300,
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            'Stisla App adalah sebuah aplikasi sederhana untuk tugas Mobile', textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: FontPicker.medium,
+                                color: ColorPicker.grey,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: 20,
-                    ),
-                    isLogin.value ? loginWidget() : registerWidget(),
-                    SizedBox(
-                      height: 80,
+                      height: 50,
                     ),
                     Container(
                       alignment: Alignment.bottomCenter,
@@ -125,6 +137,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    isLogin.value ? loginWidget() : registerWidget(),
                   ]),
             ),
           ),
@@ -136,17 +152,17 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget registerWidget() {
     return Column(
       children: [
-        InputTextFieldWidget(registerationController.nameController, 'name', false),
+        InputTextFieldWidget(registerationController.nameController, 'Name', false),
         SizedBox(
           height: 20,
         ),
         InputTextFieldWidget(
-            registerationController.emailController, 'email address', false),
+            registerationController.emailController, 'Email', false),
         SizedBox(
           height: 20,
         ),
         InputTextFieldWidget(
-            registerationController.passwordController, 'password', true),
+            registerationController.passwordController, 'Password', true),
         SizedBox(
           height: 20,
         ),
@@ -164,11 +180,11 @@ class _AuthScreenState extends State<AuthScreen> {
         SizedBox(
           height: 20,
         ),
-        InputTextFieldWidget(loginController.emailController, 'email address', false),
+        InputTextFieldWidget(loginController.emailController, 'Email', false),
         SizedBox(
           height: 20,
         ),
-        InputTextFieldWidget(loginController.passwordController, 'password', true),
+        InputTextFieldWidget(loginController.passwordController, 'Password', true),
         SizedBox(
           height: 20,
         ),

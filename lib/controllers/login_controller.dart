@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:stisla_app/views/auth/auth_screen.dart';
 import 'package:stisla_app/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,45 @@ class LoginController extends GetxController {
         } else if (json['code'] == 1) {
           throw jsonDecode(response.body)['message'];
         }
+      } else {
+        throw jsonDecode(response.body)["Message"] ?? "Unknown Error Occured";
+      }
+    } catch (error) {
+      Get.back();
+      showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
+              children: [Text(error.toString())],
+            );
+          });
+    }
+  }
+
+  Future<void> logoutWithEmail() async {
+    // ignore: no_leading_underscores_for_local_identifiers
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var token = _prefs.getString('token');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+              
+    try {
+      var url = Uri.parse(
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logoutEmail);
+      http.Response response =
+          await http.post(url, headers: headers);
+      // ignore: avoid_print
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        _prefs.clear();
+        Get.off(const AuthScreen());
+        print(json);
       } else {
         throw jsonDecode(response.body)["Message"] ?? "Unknown Error Occured";
       }

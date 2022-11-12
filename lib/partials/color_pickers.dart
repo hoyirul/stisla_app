@@ -9,4 +9,5 @@ class ColorPicker{
   static const black = Color(0xff000000);
   static const dark = Color(0xff2F2F2F);
   static const hintText = Color(0xffdddddd);
+  static const grey = Color.fromARGB(255, 103, 103, 103);
 }

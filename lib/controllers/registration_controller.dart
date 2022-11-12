@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:stisla_app/views/home/home.dart';
+import 'package:stisla_app/views/auth/auth_screen.dart';
+// import 'package:stisla_app/views/home/home.dart';
 import 'package:stisla_app/utils/api_endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,15 +32,27 @@ class RegisterationController extends GetxController {
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         if (json['code'] == 0) {
-          var token = json['token'];
-          print(token);
-          final SharedPreferences prefs = await _prefs;
+          
+          // var token = json['token'];
+          // print(token);
+          // final SharedPreferences prefs = await _prefs;
+          // await prefs.setString('token', token);
+          Get.off(const AuthScreen());
+          showDialog(
+            context: Get.context!,
+            builder: (context) {
+              return const SimpleDialog(
+                title: Text('Success'),
+                contentPadding: EdgeInsets.all(20),
+                children: [
+                  Text('Register Successfuly, please login with your account!'),
+                ],
+              );
+          });
 
-          await prefs.setString('token', token);
           nameController.clear();
           emailController.clear();
           passwordController.clear();
-          Get.off(const HomeScreen());
         } else {
           throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
         }
