@@ -1,5 +1,20 @@
 # stisla_app
 
+## How to install
+- make api server (laravel, lumen etc)
+- git clone https://github.com/hoyirul/stisla_app.git
+- cd stisla_app
+- flutter pub upgrade
+- edit your endpoint (lib/utils/api_endpoints.dart)
+- flutter run
+
+## UI Stisla Apps
+<img src="./assets/reports/splash.png" width="40%">
+<img src="./assets/reports/register.png" width="40%">
+<img src="./assets/reports/login.png" width="40%">
+<img src="./assets/reports/home.png" width="40%">
+
+
 A new Flutter project.
 
 ## Getting Started
