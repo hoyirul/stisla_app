@@ -9,10 +9,7 @@
 - flutter run
 
 ## UI Stisla Apps
-<img src="./assets/reports/splash.png" width="20%">
-<img src="./assets/reports/register.png" width="20%">
-<img src="./assets/reports/login.png" width="20%">
-<img src="./assets/reports/home.png" width="20%">
+<img src="./assets/reports/splash.png" width="20%"> <img src="./assets/reports/register.png" width="20%"> <img src="./assets/reports/login.png" width="20%"> <img src="./assets/reports/home.png" width="20%">
 
 
 A new Flutter project.
