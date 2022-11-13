@@ -1,6 +1,7 @@
 # stisla_app
 
 ## How to install
+- url model https://app.quicktype.io/
 - make api server (laravel, lumen etc)
 - git clone https://github.com/hoyirul/stisla_app.git
 - cd stisla_app

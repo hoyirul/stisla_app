@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stisla_app/controllers/login_controller.dart';
+import 'package:stisla_app/controllers/user_controller.dart';
+import 'package:stisla_app/models/user_model.dart';
 import 'package:stisla_app/partials/color_pickers.dart';
 import 'package:stisla_app/partials/font_pickers.dart';
-import 'package:stisla_app/views/auth/auth_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   LoginController loginController = Get.put(LoginController());
+  UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +46,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Stisla App', style: TextStyle(
-                        fontFamily: FontPicker.bold,
-                        fontSize: 20,
-                        color: ColorPicker.white
-                      ),),
-                      Align(
-                        child: Text('Developers', style: TextStyle(
-                          fontFamily: FontPicker.medium,
-                          fontSize: 14,
+                    children: [
+                      FutureBuilder(
+                        future: userController.getName(),
+                        builder: (context, snapshot) => Text('Hai, ${snapshot.data}', style: const TextStyle(
+                          fontFamily: FontPicker.bold,
+                          fontSize: 20,
                           color: ColorPicker.white
                         ),),
+                      ),
+                      const Align(
+                        child: Text('Developers', style: TextStyle(
+                            fontFamily: FontPicker.medium,
+                            fontSize: 14,
+                            color: ColorPicker.white
+                          ),),
                       ),
                     ],
                   ),

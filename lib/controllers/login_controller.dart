@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:stisla_app/models/user_model.dart';
 import 'package:stisla_app/views/auth/auth_screen.dart';
 import 'package:stisla_app/views/home/home.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class LoginController extends GetxController {
         if (json['code'] == 0) {
           var token = json['token'];
           var name = json['data']['name'];
+
           final SharedPreferences prefs = await _prefs;
           await prefs.setString('token', token);
           await prefs.setString('name', name);
