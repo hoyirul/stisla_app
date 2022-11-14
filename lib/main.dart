@@ -1,6 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stisla_app/partials/color_pickers.dart';
-import 'package:stisla_app/views/auth/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stisla_app/views/home/home.dart';
