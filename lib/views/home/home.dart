@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stisla_app/controllers/category_controller.dart';
 import 'package:stisla_app/controllers/login_controller.dart';
 import 'package:stisla_app/controllers/user_controller.dart';
-import 'package:stisla_app/models/user_model.dart';
 import 'package:stisla_app/partials/color_pickers.dart';
 import 'package:stisla_app/partials/font_pickers.dart';
 
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   LoginController loginController = Get.put(LoginController());
   UserController userController = Get.put(UserController());
+  CategoryController categoryController = Get.put(CategoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +178,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               )
                             ]
                           ),
-                          child: const TextButton(
-                            onPressed: null,
-                            child: Text('Submit', style: TextStyle(
+                          child: TextButton(
+                            onPressed: () {
+                              categoryController.getList();
+                            },
+                            child: const Text('Submit', style: TextStyle(
                               color: ColorPicker.white,
                               fontFamily: FontPicker.semibold,
                               fontSize: 16

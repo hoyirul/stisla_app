@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:stisla_app/models/user_model.dart';
 import 'package:stisla_app/views/auth/auth_screen.dart';
 import 'package:stisla_app/views/home/home.dart';
 import 'package:flutter/material.dart';

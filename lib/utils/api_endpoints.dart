@@ -7,4 +7,8 @@ class _AuthEndPoints {
   final String registerEmail = 'auth/register';
   final String loginEmail = 'auth/login';
   final String logoutEmail = 'auth/logout';
+
+  String getUri(String uri){
+    return uri;
+  }
 }
