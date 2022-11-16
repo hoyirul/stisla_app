@@ -1,15 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
+import 'package:stisla_app/models/category_model.dart';
 import 'package:stisla_app/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:stisla_app/utils/headers_helper.dart';
 
 class CategoryController extends GetxController{
   
-  Future<void> getList() async{
+  Future<void> getList() async {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     var token = _prefs.getString('token');
     try{
@@ -35,4 +37,21 @@ class CategoryController extends GetxController{
           });
     }
   }
+}
+
+class CategoryStream{
+  CategoryStream(){
+    outputSink = outputController.sink;
+    inputSink = inputController.sink;
+    inputController.stream.listen((event) {
+      CategoryModel();
+      outputSink.add(event);
+    });
+  }
+
+  late StreamSink outputSink;
+  late StreamSink inputSink;
+
+  StreamController inputController = StreamController();
+  StreamController outputController = StreamController();
 }

@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   LoginController loginController = Get.put(LoginController());
   UserController userController = Get.put(UserController());
   CategoryController categoryController = Get.put(CategoryController());
+  CategoryStream categoryStream = CategoryStream();
 
   @override
   Widget build(BuildContext context) {
@@ -211,38 +212,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    itemCount: 7,
-                    physics: const NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: ColorPicker.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: ColorPicker.hintText,
-                              offset: Offset(0, 1),
-                              blurRadius: 7
-                            )
-                          ]
-                        ),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Category ${index + 1}", style: const TextStyle(
-                            color: ColorPicker.grey,
-                            fontFamily: FontPicker.medium
-                          ),)
-                        ),
-                      );
-                    },
+                  StreamBuilder(
+                    builder: (context, snapshot) => ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      itemCount: 7,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: ColorPicker.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: ColorPicker.hintText,
+                                offset: Offset(0, 1),
+                                blurRadius: 7
+                              )
+                            ]
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Category ${index + 1}", style: const TextStyle(
+                              color: ColorPicker.grey,
+                              fontFamily: FontPicker.medium
+                            ),)
+                          ),
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
