@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   LoginController loginController = Get.put(LoginController());
   UserController userController = Get.put(UserController());
   CategoryController categoryController = Get.put(CategoryController());
-  CategoryStream categoryStream = CategoryStream();
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ]
                           ),
                           child: TextFormField(
+                            controller: categoryController.nameController,
                             decoration: const InputDecoration(
                               hintText: "Category",
                               border: InputBorder.none
@@ -180,7 +180,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: TextButton(
                             onPressed: () {
-                              categoryController.getList();
+                              categoryController.addData();
+                              print(categoryController.categoryList.length);
                             },
                             child: const Text('Submit', style: TextStyle(
                               color: ColorPicker.white,
@@ -212,41 +213,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  StreamBuilder(
-                    builder: (context, snapshot) => ListView.builder(
-                      padding: const EdgeInsets.all(0),
-                      itemCount: 7,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: ColorPicker.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: ColorPicker.hintText,
-                                offset: Offset(0, 1),
-                                blurRadius: 7
-                              )
-                            ]
-                          ),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Category ${index + 1}", style: const TextStyle(
-                              color: ColorPicker.grey,
-                              fontFamily: FontPicker.medium
-                            ),)
-                          ),
-                        );
-                      },
-                    ),
-                  )
+                  Obx(() {
+                    if(categoryController.isLoading.value){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else{
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        itemCount: categoryController.categoryList.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var row = categoryController.categoryList[index];
+                          return Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.only(left: 10, right: 0),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: ColorPicker.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: ColorPicker.hintText,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 7
+                                )
+                              ]
+                            ),
+                            child: ListTile(
+                              title: Text(row.name, style: const TextStyle(
+                                    color: ColorPicker.grey,
+                                    fontFamily: FontPicker.medium,
+                                    fontSize: 13
+                                  ),),
+                              trailing: IconButton(
+                                onPressed: () => categoryController.confirmAlert(row.id),
+                                icon: const Icon(Icons.delete_outline_rounded, color: ColorPicker.danger,),
+                              ),
+                            )
+                          );
+                        },
+                      );
+                    }
+                  })
                 ],
               ),
             )

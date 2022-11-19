@@ -5,8 +5,8 @@ import 'package:stisla_app/partials/color_pickers.dart';
 import 'package:stisla_app/partials/font_pickers.dart';
 
 class InputTextFieldWidget extends StatelessWidget {
-  final TextEditingController textEditingController;
   final String hintText;
+  final TextEditingController textEditingController;
   final bool _obscureText;
   const InputTextFieldWidget(this.textEditingController, this.hintText, this._obscureText,{super.key});
   @override

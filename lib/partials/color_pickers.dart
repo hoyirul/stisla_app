@@ -4,6 +4,7 @@ class ColorPicker{
   static const primaryLight = Color(0xff2CBA8D);
   static const primaryShape = Color.fromARGB(144, 44, 186, 141);
   static const orangeColor = Color(0xffFFA26C);
+  static const danger = Color.fromARGB(255, 255, 50, 88);
   static const white = Color(0xffffffff);
   static const bg = Color(0xffE5ECF0);
   static const black = Color(0xff000000);

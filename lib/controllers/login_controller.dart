@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: 'superadmin@gmail.com');
+  TextEditingController passwordController = TextEditingController(text: 'password');
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> loginWithEmail() async {
@@ -74,6 +74,7 @@ class LoginController extends GetxController {
           await http.post(url, headers: headers);
       // ignore: avoid_print
       print(response.statusCode);
+      // print(response.body);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         _prefs.clear();
