@@ -8,16 +8,23 @@ import 'package:stisla_app/models/category_model.dart';
 import 'package:stisla_app/utils/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:stisla_app/utils/headers_helper.dart';
+import 'package:stisla_app/views/home/home.dart';
 
 class CategoryController extends GetxController{
   var isLoading = true.obs;
   var categoryList = <CategoryModel>[].obs;
+  String controller = '';
   TextEditingController nameController = TextEditingController();
 
   @override
   void onInit() {
     fetchData();
+    changeController();
     super.onInit();
+  }
+
+  void changeController(){
+    nameController.text = (controller == '') ? '' : controller;
   }
 
   void confirmAlert(id) {
@@ -68,6 +75,7 @@ class CategoryController extends GetxController{
   }
 
   static Future<List<CategoryModel>?> getList() async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     var token = _prefs.getString('token');
     try{
@@ -118,6 +126,42 @@ class CategoryController extends GetxController{
         nameController.clear();
         onInit();
         var message = 'Insert successfully!';
+        Get.back();
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return SimpleDialog(
+              title: const Text('Success'),
+              contentPadding: const EdgeInsets.all(20),
+              children: [Text(message.toString())],
+            );
+          });
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> updateData(int id) async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var token = _prefs.getString('token');
+
+    try{
+      isLoading(true);
+      var url = Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.getUri('categories/$id'));
+      Map body = {
+        'name': nameController.text
+      };
+      http.Response response = await http.put(url, body: jsonEncode(body), headers: HeadersHelper().getHeaders(token));
+      
+      print(response.statusCode);
+      print(response.body);
+      if(response.statusCode == 200){
+        controller = '';
+        nameController.clear();
+        Get.offAll(const HomeScreen());
+        onInit();
+        var message = 'Update successfully!';
         Get.back();
         showDialog(
           context: Get.context!,
