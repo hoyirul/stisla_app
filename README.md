@@ -1,6 +1,7 @@
 # stisla_app
 
 ## How to install
+- install server https://github.com/hoyirul/laravel9-starter-stisla.git
 - url model https://app.quicktype.io/
 - make api server (laravel, lumen etc)
 - git clone https://github.com/hoyirul/stisla_app.git
